@@ -16,6 +16,7 @@ jobs:
         version:
           - '1'
           - '1.6'
+          - 'nightly'
     steps:
       - uses: actions/checkout@v2
       - uses: julia-actions/setup-julia@v1
@@ -32,7 +33,9 @@ jobs:
             ${{ runner.os }}-test-
             ${{ runner.os }}-
       - uses: julia-actions/julia-buildpkg@v1
-      - uses: julia-actions/julia-runtest@v1
+      - uses: sjkelly/julia-runtest@sjk/julia_args1
+        with:
+          julia_args: --heap-size-hint=6G
       - uses: julia-actions/julia-processcoverage@v1
       - uses: codecov/codecov-action@v1
         with:
